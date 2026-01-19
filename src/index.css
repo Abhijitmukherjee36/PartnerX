@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* Global styles */
+html, body {
+  background-color: #020617; /* slate-950 */
+  color: #f8fafc;           /* slate-50 */
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
