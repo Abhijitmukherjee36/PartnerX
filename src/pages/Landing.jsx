@@ -39,14 +39,38 @@ export default function Landing() {
         }
       `}</style>
 
-      {/* Background Gradients - Hero Section */}
-      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 via-primary/5 to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-gradient-to-tl from-primary/10 via-transparent to-transparent rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
+      {/* Background Gradients - Hero Section - Corner Glow Effect */}
+      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none overflow-hidden">
+        {/* Main corner glow - pink/purple hue from top-left */}
+        <div 
+          className="absolute -top-[20%] -left-[10%] w-[70%] h-[80%]"
+          style={{
+            background: 'radial-gradient(ellipse at top left, rgba(227, 11, 92, 0.35) 0%, rgba(180, 20, 100, 0.2) 25%, rgba(120, 20, 80, 0.1) 45%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        ></div>
+        
+        {/* Secondary glow layer for depth */}
+        <div 
+          className="absolute -top-[10%] -left-[5%] w-[50%] h-[60%]"
+          style={{
+            background: 'radial-gradient(ellipse at top left, rgba(255, 64, 129, 0.25) 0%, rgba(227, 11, 92, 0.15) 30%, transparent 60%)',
+            filter: 'blur(80px)'
+          }}
+        ></div>
+        
+        {/* Subtle bottom-right accent */}
+        <div 
+          className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[50%]"
+          style={{
+            background: 'radial-gradient(ellipse at bottom right, rgba(227, 11, 92, 0.12) 0%, transparent 50%)',
+            filter: 'blur(60px)'
+          }}
+        ></div>
       </div>
 
-      {/* Header / Navbar - Fixed */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-4 flex items-center justify-between bg-black/80 backdrop-blur-md">
+      {/* Header / Navbar - Transparent */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-4 flex items-center justify-between">
         <h1 className="font-display text-lg sm:text-xl lg:text-2xl font-bold gradient-text">
           PartnerX
         </h1>
@@ -67,7 +91,7 @@ export default function Landing() {
       </header>
 
       {/* ==================== SECTION 1: Hero ==================== */}
-      <section className="relative z-10 min-h-screen flex items-center px-4 sm:px-6 lg:px-12 pt-20">
+      <section className="relative z-10 min-h-screen flex items-center px-4 sm:px-6 lg:px-12 pt-20 pb-8 overflow-visible">
         <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           
           {/* Left Side - Headline */}
@@ -103,51 +127,143 @@ export default function Landing() {
             </Link>
           </div>
 
-          {/* Right Side - Orbiting Avatars */}
-          <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] flex items-center justify-center order-1 lg:order-2">
-            {/* Orbit Rings */}
-            <div className="absolute w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] md:w-[280px] md:h-[280px] lg:w-[320px] lg:h-[320px] rounded-full orbit-ring"></div>
-            <div className="absolute w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full orbit-ring"></div>
+          {/* Right Side - Premium Interactive Orbital Network */}
+          <div className="relative h-[320px] sm:h-[380px] md:h-[440px] lg:h-[500px] flex items-center justify-center order-1 lg:order-2">
             
-            {/* Center Stats */}
-            <div className="absolute text-center glow-pink bg-black/50 backdrop-blur-sm px-5 sm:px-6 py-4 sm:py-5 rounded-xl border border-primary/20">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white">1k+</p>
-              <p className="text-gray-400 text-xs sm:text-sm">Partners Ready</p>
+            {/* Orbital animations CSS */}
+            <style>{`
+              /* Orbit wrapper rotates, child counter-rotates to keep image upright */
+              @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+              @keyframes orbitSpinReverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+              @keyframes counterSpin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+              @keyframes counterSpinReverse { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+              
+              @keyframes centerGlow {
+                0%, 100% { box-shadow: 0 0 40px rgba(227, 11, 92, 0.45), 0 0 80px rgba(227, 11, 92, 0.2); }
+                50% { box-shadow: 0 0 60px rgba(227, 11, 92, 0.65), 0 0 100px rgba(227, 11, 92, 0.35); }
+              }
+              
+              .orbit-glow-ring {
+                border: 1px solid rgba(227, 11, 92, 0.3);
+                box-shadow: 0 0 20px rgba(227, 11, 92, 0.08), inset 0 0 20px rgba(227, 11, 92, 0.04);
+              }
+              
+              .orbit-node-img {
+                transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+              }
+              .orbit-node-img:hover {
+                transform: scale(1.2);
+                box-shadow: 0 0 30px rgba(227, 11, 92, 0.7);
+                border-color: rgba(227, 11, 92, 0.8);
+              }
+            `}</style>
+            
+            {/* Three glowing orbit rings */}
+            <div className="absolute w-[150px] h-[150px] sm:w-[190px] sm:h-[190px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] rounded-full orbit-glow-ring"></div>
+            <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-full orbit-glow-ring"></div>
+            <div className="absolute w-[290px] h-[290px] sm:w-[370px] sm:h-[370px] md:w-[460px] md:h-[460px] lg:w-[520px] lg:h-[520px] rounded-full orbit-glow-ring opacity-60"></div>
+            
+            {/* Center PartnerX Logo with pulsing glow */}
+            <div 
+              className="absolute w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full flex items-center justify-center z-30"
+              style={{
+                background: 'radial-gradient(circle, #181818 0%, #0c0c0c 50%, #000000 100%)',
+                animation: 'centerGlow 4s ease-in-out infinite'
+              }}
+            >
+              <span className="font-display text-sm sm:text-base md:text-lg lg:text-xl font-bold">
+                <span className="text-white">Partner</span>
+                <span className="text-[#E30B5C]">X</span>
+              </span>
             </div>
 
-            {/* Floating Avatars with meaningful images */}
-            <div className="absolute -top-2 sm:top-0 left-1/2 -translate-x-1/2 float-animation">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
-                <img src="/images/travel-adventure.png" alt="Travel Partner" className="w-full h-full object-cover" />
+            {/* ===== ORBIT 1 (Inner) - 2 nodes, 28s ===== */}
+            <div 
+              className="absolute w-[150px] h-[150px] sm:w-[190px] sm:h-[190px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] z-10"
+              style={{ animation: 'orbitSpin 28s linear infinite' }}
+            >
+              {/* Node 1 - top */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animation: 'counterSpin 28s linear infinite' }}>
+                <div className="orbit-node-img w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/30 cursor-pointer">
+                  <img src="/images/travel-adventure.png" alt="Travel" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              {/* Node 2 - bottom */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2" style={{ animation: 'counterSpin 28s linear infinite' }}>
+                <div className="orbit-node-img w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full overflow-hidden border-2 border-white/40 shadow-lg shadow-white/20 cursor-pointer">
+                  <img src="/images/friends-cafe.png" alt="Cafe" className="w-full h-full object-cover" />
+                </div>
               </div>
             </div>
 
-            <div className="absolute top-8 sm:top-12 -right-2 sm:right-0 float-animation-delayed">
-              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-1">Travel</span>
-            </div>
-
-            <div className="absolute top-1/3 -right-4 sm:-right-2 float-animation-slow">
-              <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
-                <img src="/images/event-concert.png" alt="Event Partner" className="w-full h-full object-cover" />
+            {/* ===== ORBIT 2 (Middle) - 3 nodes, 40s reverse ===== */}
+            <div 
+              className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] z-10"
+              style={{ animation: 'orbitSpinReverse 40s linear infinite' }}
+            >
+              {/* Node 1 - top right */}
+              <div className="absolute top-[15%] right-[5%]" style={{ animation: 'counterSpinReverse 40s linear infinite' }}>
+                <div className="orbit-node-img w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-primary/60 shadow-lg shadow-primary/35 cursor-pointer">
+                  <img src="/images/event-concert.png" alt="Events" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              {/* Node 2 - bottom */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2" style={{ animation: 'counterSpinReverse 40s linear infinite' }}>
+                <div className="orbit-node-img w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white/50 shadow-lg shadow-white/25 cursor-pointer">
+                  <img src="/images/travel-adventure.png" alt="Adventure" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              {/* Node 3 - left */}
+              <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" style={{ animation: 'counterSpinReverse 40s linear infinite' }}>
+                <div className="orbit-node-img w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/30 cursor-pointer">
+                  <img src="/images/friends-cafe.png" alt="Friends" className="w-full h-full object-cover" />
+                </div>
               </div>
             </div>
 
-            <div className="absolute bottom-8 sm:bottom-12 -right-2 sm:right-0 float-animation">
-              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-2">Events</span>
-            </div>
-
-            <div className="absolute -bottom-2 sm:bottom-0 left-1/2 -translate-x-1/4 float-animation-delayed">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
-                <img src="/images/friends-cafe.png" alt="Coffee Partner" className="w-full h-full object-cover" />
+            {/* ===== ORBIT 3 (Outer) - 3 nodes, 55s ===== */}
+            <div 
+              className="absolute w-[290px] h-[290px] sm:w-[370px] sm:h-[370px] md:w-[460px] md:h-[460px] lg:w-[520px] lg:h-[520px] z-10"
+              style={{ animation: 'orbitSpin 55s linear infinite' }}
+            >
+              {/* Node 1 - top left */}
+              <div className="absolute top-[10%] left-[10%]" style={{ animation: 'counterSpin 55s linear infinite' }}>
+                <div className="orbit-node-img w-12 h-12 sm:w-13 sm:h-13 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 border-primary/60 shadow-lg shadow-primary/40 cursor-pointer">
+                  <img src="/images/event-concert.png" alt="Concert" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              {/* Node 2 - right */}
+              <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2" style={{ animation: 'counterSpin 55s linear infinite' }}>
+                <div className="orbit-node-img w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white/50 shadow-lg shadow-white/25 cursor-pointer">
+                  <img src="/images/travel-adventure.png" alt="Travel" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              {/* Node 3 - bottom left */}
+              <div className="absolute bottom-[10%] left-[15%]" style={{ animation: 'counterSpin 55s linear infinite' }}>
+                <div className="orbit-node-img w-11 h-11 sm:w-12 sm:h-12 md:w-13 md:h-13 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/35 cursor-pointer">
+                  <img src="/images/friends-cafe.png" alt="Social" className="w-full h-full object-cover" />
+                </div>
               </div>
             </div>
 
-            <div className="absolute top-1/2 -left-4 sm:-left-2 float-animation-slow">
-              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-3">Co-living</span>
+            {/* Subtle floating category labels */}
+            <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Travel</span>
             </div>
-
-            <div className="absolute top-8 sm:top-12 -left-2 sm:left-0 float-animation">
-              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-1">Activities</span>
+            <div className="absolute top-1/3 -right-1 sm:right-1 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Events</span>
+            </div>
+            <div className="absolute bottom-1/3 -right-1 sm:right-1 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Dating</span>
+            </div>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Social</span>
+            </div>
+            <div className="absolute bottom-1/3 -left-1 sm:left-1 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Co-living</span>
+            </div>
+            <div className="absolute top-1/3 -left-1 sm:left-1 z-20">
+              <span className="px-3 py-1 bg-black/70 backdrop-blur text-white/70 text-[10px] sm:text-xs font-medium rounded-full border border-primary/20">Activities</span>
             </div>
           </div>
         </div>
