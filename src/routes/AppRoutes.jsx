@@ -19,11 +19,7 @@ export default function AppRoutes() {
       {/* Public */}
       <Route
         path="/"
-        element={
-          <MainLayout>
-            <Landing />
-          </MainLayout>
-        }
+        element={<Landing />}
       />
 
       <Route path="/login" element={<Login />} />

@@ -2,34 +2,583 @@ import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
-    <section className="min-h-[calc(100vh-120px)] flex items-center justify-center px-4 sm:px-6 py-8">
-      <div className="max-w-3xl text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-          Find the <span className="text-primary">Right People</span> for the
-          Right Moment
+    <div className="min-h-screen bg-black font-body text-white relative overflow-x-hidden">
+      {/* Custom styles */}
+      <style>{`
+        .gradient-text {
+          background: linear-gradient(135deg, #E30B5C 0%, #FF4081 50%, #E30B5C 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .glow-pink {
+          box-shadow: 0 0 60px rgba(255, 20, 147, 0.3), 0 0 120px rgba(255, 20, 147, 0.1);
+        }
+        .orbit-ring {
+          border: 1px solid rgba(255, 20, 147, 0.2);
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+          animation: float 4s ease-in-out infinite;
+        }
+        .float-animation-delayed {
+          animation: float 4s ease-in-out 1s infinite;
+        }
+        .float-animation-slow {
+          animation: float 5s ease-in-out 0.5s infinite;
+        }
+        .tag-rotate-1 { transform: rotate(-15deg); }
+        .tag-rotate-2 { transform: rotate(10deg); }
+        .tag-rotate-3 { transform: rotate(-8deg); }
+        .member-badge {
+          background: linear-gradient(135deg, #E30B5C 0%, #B8094A 100%);
+          box-shadow: 0 0 30px rgba(227, 11, 92, 0.5);
+        }
+      `}</style>
+
+      {/* Background Gradients - Hero Section */}
+      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 via-primary/5 to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-gradient-to-tl from-primary/10 via-transparent to-transparent rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
+      </div>
+
+      {/* Header / Navbar - Fixed */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-4 flex items-center justify-between bg-black/80 backdrop-blur-md">
+        <h1 className="font-display text-lg sm:text-xl lg:text-2xl font-bold gradient-text">
+          PartnerX
         </h1>
-
-        <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-400 px-2">
-          Discover verified partners for travel, events, clubbing, co-living,
-          and more — safely and transparently.
-        </p>
-
-        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <Link
             to="/login"
-            className="bg-primary border border-primary px-5 sm:px-6 py-3 rounded-xl text-white font-medium hover:opacity-90 transition"
+            className="px-4 sm:px-5 py-2 text-gray-300 hover:text-white transition-colors text-xs sm:text-sm font-medium"
           >
-            Get Started
+            Log In
           </Link>
-
           <Link
-            to="/discover"
-            className="border border-slate-700 px-5 sm:px-6 py-3 rounded-xl hover:border-primary transition"
+            to="/signup"
+            className="px-5 sm:px-6 py-2 sm:py-2.5 bg-gradient-to-r from-primary via-primary-light to-primary hover:from-primary-light hover:to-primary text-white font-semibold rounded-full text-xs sm:text-sm transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.5),0_0_40px_rgba(255,20,147,0.3)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7),0_0_60px_rgba(255,20,147,0.4)]"
           >
-            Explore
+            Join Now
           </Link>
         </div>
-      </div>
-    </section>
+      </header>
+
+      {/* ==================== SECTION 1: Hero ==================== */}
+      <section className="relative z-10 min-h-screen flex items-center px-4 sm:px-6 lg:px-12 pt-20">
+        <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Side - Headline */}
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-3 sm:mb-4">
+              Find Your Perfect
+              <br />
+              <span className="gradient-text">Partner</span> For
+              <br />
+              Every Moment —
+              <br />
+              <span className="text-gray-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">Just One Click Away!</span>
+            </h2>
+
+            <p className="text-gray-400 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 max-w-md mx-auto lg:mx-0">
+              Connect with verified partners for travel, events, adventures, and more. No more solo suffering.
+            </p>
+
+            {/* CTA Button */}
+            <Link
+              to="/discover"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 group text-sm sm:text-base shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
+            >
+              Get Started
+              <svg 
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* Right Side - Orbiting Avatars */}
+          <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] flex items-center justify-center order-1 lg:order-2">
+            {/* Orbit Rings */}
+            <div className="absolute w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] md:w-[280px] md:h-[280px] lg:w-[320px] lg:h-[320px] rounded-full orbit-ring"></div>
+            <div className="absolute w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full orbit-ring"></div>
+            
+            {/* Center Stats */}
+            <div className="absolute text-center glow-pink bg-black/50 backdrop-blur-sm px-5 sm:px-6 py-4 sm:py-5 rounded-xl border border-primary/20">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white">1k+</p>
+              <p className="text-gray-400 text-xs sm:text-sm">Partners Ready</p>
+            </div>
+
+            {/* Floating Avatars with meaningful images */}
+            <div className="absolute -top-2 sm:top-0 left-1/2 -translate-x-1/2 float-animation">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
+                <img src="/images/travel-adventure.png" alt="Travel Partner" className="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            <div className="absolute top-8 sm:top-12 -right-2 sm:right-0 float-animation-delayed">
+              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-1">Travel</span>
+            </div>
+
+            <div className="absolute top-1/3 -right-4 sm:-right-2 float-animation-slow">
+              <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
+                <img src="/images/event-concert.png" alt="Event Partner" className="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            <div className="absolute bottom-8 sm:bottom-12 -right-2 sm:right-0 float-animation">
+              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-2">Events</span>
+            </div>
+
+            <div className="absolute -bottom-2 sm:bottom-0 left-1/2 -translate-x-1/4 float-animation-delayed">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20">
+                <img src="/images/friends-cafe.png" alt="Coffee Partner" className="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            <div className="absolute top-1/2 -left-4 sm:-left-2 float-animation-slow">
+              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-3">Co-living</span>
+            </div>
+
+            <div className="absolute top-8 sm:top-12 -left-2 sm:left-0 float-animation">
+              <span className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-full tag-rotate-1">Activities</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 2: Mission ==================== */}
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-b from-black via-gray-950 to-black">
+        {/* Background glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2"></div>
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Side - Text Content */}
+          <div className="order-2 lg:order-1">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              We exist to bring
+              <br />
+              people closer to
+              <br />
+              <span className="gradient-text">experiences.</span>
+            </h2>
+
+            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-8 max-w-lg">
+              We want our members to find meaningful and authentic connections that ignite confidence and joy in every journey.
+            </p>
+
+            <Link
+              to="/discover"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
+            >
+              Discover Partners
+            </Link>
+          </div>
+
+          {/* Right Side - Photos with Tags */}
+          <div className="relative order-1 lg:order-2 h-[350px] sm:h-[400px] lg:h-[450px]">
+            {/* Main Photo */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] lg:w-[260px] rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 border border-primary/20">
+              <img src="/images/travel-adventure.png" alt="Travel Partner" className="w-full aspect-[3/4] object-cover" />
+              <div className="absolute top-4 -right-4 sm:-right-6">
+                <span className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-full shadow-lg tag-rotate-2 inline-block">
+                  Outdoors
+                </span>
+              </div>
+            </div>
+
+            {/* Second Photo - Top Right */}
+            <div className="absolute top-4 sm:top-6 right-0 sm:right-4 w-[110px] sm:w-[140px] lg:w-[160px] rounded-xl overflow-hidden shadow-xl border border-gray-700">
+              <img src="/images/event-concert.png" alt="Event Partner" className="w-full aspect-[3/4] object-cover" />
+              <div className="absolute top-2 -left-2 sm:-left-4">
+                <span className="px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-full shadow-lg tag-rotate-3 inline-block">
+                  Concerts
+                </span>
+              </div>
+            </div>
+
+            {/* Third Photo - Bottom Right */}
+            <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-8 w-[90px] sm:w-[120px] lg:w-[140px] rounded-xl overflow-hidden shadow-xl border border-gray-700">
+              <img src="/images/friends-cafe.png" alt="Cafe Partner" className="w-full aspect-[3/4] object-cover" />
+              <div className="absolute -top-2 right-2">
+                <span className="px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-full shadow-lg tag-rotate-1 inline-block">
+                  Coffee
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 3: Community ==================== */}
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-b from-black to-gray-950">
+        {/* Background glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Side - Photo with Badge */}
+          <div className="relative h-[350px] sm:h-[400px] lg:h-[450px]">
+            {/* Main Photo */}
+            <div className="relative w-full max-w-md mx-auto h-full rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
+              <img 
+                src="/images/friends-cafe.png" 
+                alt="Community Members" 
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Member Circle Badge */}
+              <div className="absolute bottom-6 left-6">
+                <div className="member-badge w-24 h-24 sm:w-28 sm:h-28 rounded-full flex flex-col items-center justify-center text-white">
+                  <svg className="w-8 h-8 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  <span className="text-xs font-bold uppercase tracking-wider">Member</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">Circle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Text Content */}
+          <div>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              Share your <span className="gradient-text">ideas</span>
+            </h2>
+
+            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-4">
+              Help shape the future of PartnerX by joining our Member Circle. This select community of Members shares ideas directly with our team through chats, discussions, and product tests.
+            </p>
+
+            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-8">
+              Participants get early access to new features, sneak peeks at upcoming campaigns, and the chance to help make PartnerX even better for everyone.
+            </p>
+
+            <Link
+              to="/signup"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
+            >
+              Sign up
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 4: Features ==================== */}
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black">
+        <div className="w-full max-w-7xl mx-auto">
+          {/* Feature Cards Grid */}
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            
+            {/* Card 1: Find Partners */}
+            <div className="rounded-3xl p-3 sm:p-4 overflow-visible cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(227,11,92,0.6)] hover:scale-[1.02] group" style={{ background: 'linear-gradient(135deg, #E30B5C 0%, #B8094A 100%)' }}>
+              {/* Black Inner Container - Single Showcase Image */}
+              <div className="relative bg-black rounded-2xl overflow-hidden border border-gray-800">
+                <img 
+                  src="/images/partners-showcase.png" 
+                  alt="Find Partners Showcase" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* Card Content */}
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
+                Find Partners
+              </h3>
+              <p className="text-white/80 mb-4">
+                Whether you're new to a city or looking for adventure buddies, PartnerX helps you find verified partners for travel, events, and everyday moments.
+              </p>
+              <Link to="/discover" className="inline-flex items-center text-white font-medium hover:underline group/link">
+                Find your partner
+                <svg className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Card 2: Events & Activities */}
+            <div className="rounded-3xl p-3 sm:p-4 overflow-visible cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(227,11,92,0.6)] hover:scale-[1.02] group" style={{ background: 'linear-gradient(135deg, #E30B5C 0%, #B8094A 100%)' }}>
+              {/* Black Inner Container - Single Showcase Image */}
+              <div className="relative bg-black rounded-2xl overflow-hidden border border-gray-800">
+                <img 
+                  src="/images/events-showcase.png" 
+                  alt="Events & Activities Showcase" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* Card Content */}
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
+                Events & Activities
+              </h3>
+              <p className="text-white/80 mb-4">
+                Whether you've moved to a new city or just want to expand your circle, discover local events and find like-minded people who match your vibe.
+              </p>
+              <Link to="/events" className="inline-flex items-center text-white font-medium hover:underline group/link">
+                Find your events
+                <svg className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 5: Success Stories ==================== */}
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Side - Testimonial */}
+            <div className="order-2 lg:order-1">
+              {/* Quote Mark */}
+              <div className="text-primary text-6xl font-display leading-none mb-4">"</div>
+              
+              {/* Quote Text */}
+              <blockquote className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+                We are both naturally positive, happy-go-getters, but when you put us together, it feels like there is nothing we can't accomplish.
+              </blockquote>
+              
+              {/* Attribution */}
+              <p className="text-gray-400 text-lg mb-8">
+                <span className="text-primary font-medium">Leslie & Thomas</span>, partners since 2024
+              </p>
+              
+              {/* CTA Button */}
+              <Link
+                to="/stories"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.7)]"
+              >
+                Read more stories
+              </Link>
+            </div>
+
+            {/* Right Side - Video */}
+            <div className="order-1 lg:order-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] sm:min-h-[500px]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover min-h-[400px] sm:min-h-[500px]"
+                >
+                  <source src="/couple-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 6: Meet In Person ==================== */}
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Side - Video */}
+            <div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] sm:min-h-[500px]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover min-h-[400px] sm:min-h-[500px]"
+                >
+                  <source src="/landing-tennis.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            {/* Right Side - Content */}
+            <div>
+              {/* Heading */}
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                Start the chat in person
+              </h2>
+              
+              {/* Description */}
+              <p className="text-gray-400 text-lg sm:text-xl mb-8 max-w-lg">
+                PartnerX IRL events mean you can stop typing and start talking. Come solo or bring a friend—and leave with a new connection.
+              </p>
+              
+              {/* CTA Button */}
+              <Link
+                to="/events"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.7)]"
+              >
+                Meet in person
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 7: Banner ==================== */}
+      <section className="relative z-10 bg-black">
+        {/* Mobile: Raspberry background with text + image */}
+        <div className="lg:hidden" style={{ background: 'linear-gradient(135deg, #E30B5C 0%, #B8094A 100%)' }}>
+          <div className="px-4 pt-10 pb-0">
+            {/* Text Content */}
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-3">
+              Get the app
+            </h2>
+            <p className="text-white/80 text-lg mb-6">
+              Find your next partner
+            </p>
+            
+            {/* Download Button */}
+            <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-full mb-8">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download now
+            </a>
+          </div>
+          
+          {/* Mobile Banner Image */}
+          <div className="w-full">
+            <img 
+              src="/images/landing-banner.png" 
+              alt="PartnerX App Preview" 
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+
+        {/* Desktop: Black background with image + buttons */}
+        <div className="hidden lg:block py-12 sm:py-16 px-4 sm:px-6 lg:px-12">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Banner Image */}
+            <div className="rounded-2xl overflow-hidden mb-8">
+              <img 
+                src="/images/landing-banner.png" 
+                alt="PartnerX App Preview" 
+                className="w-full h-auto"
+              />
+            </div>
+            
+            {/* App Store Buttons */}
+            <div className="flex flex-wrap justify-center gap-4">
+              <a href="#" className="inline-flex items-center gap-3 px-5 py-3 bg-white text-black rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div className="text-left">
+                  <div className="text-[10px] opacity-70">Download on the</div>
+                  <div className="text-sm font-semibold">App Store</div>
+                </div>
+              </a>
+              <a href="#" className="inline-flex items-center gap-3 px-5 py-3 bg-white text-black rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                </svg>
+                <div className="text-left">
+                  <div className="text-[10px] opacity-70">Get it on</div>
+                  <div className="text-sm font-semibold">Google Play</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== FOOTER ==================== */}
+      <footer className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-12" style={{ background: 'linear-gradient(135deg, #E30B5C 0%, #B8094A 100%)' }}>
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+            
+            {/* Logo & QR Code */}
+            <div className="lg:col-span-2">
+              <Link to="/" className="inline-block mb-6">
+                <span className="font-display text-3xl font-bold text-white">Partner<span className="text-white">X</span></span>
+              </Link>
+              
+              {/* QR Code */}
+              <div className="flex items-center gap-4 p-4 bg-black rounded-xl max-w-xs">
+                <div className="bg-white rounded-lg p-2 w-20 h-20 flex items-center justify-center">
+                  <svg className="w-14 h-14 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h1v1h-1v-1zm-3 0h1v3h-1v-3zm0 4h1v1h-1v-1zm3 0h1v1h-1v-1zm-1-3h1v1h-1v-1zm1 1h1v1h-1v-1zm-1 1h1v1h-1v-1zm1 1h1v1h-1v-1zm-2 0h1v1h-1v-1z"/>
+                  </svg>
+                </div>
+                <div className="text-white text-sm font-medium">
+                  Scan the QR code to get the PartnerX app
+                </div>
+              </div>
+            </div>
+
+            {/* Our Apps */}
+            <div>
+              <h4 className="text-white/70 text-sm font-medium mb-4">Our apps</h4>
+              <ul className="space-y-3">
+                <li><Link to="/discover" className="text-white hover:text-white/80 font-medium">PartnerX Date</Link></li>
+                <li><Link to="/friends" className="text-white hover:text-white/80 font-medium">BFF</Link></li>
+                <li><a href="#" className="text-white hover:text-white/80 font-medium">Bizz</a></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="text-white/70 text-sm font-medium mb-4">Company</h4>
+              <ul className="space-y-3">
+                <li><Link to="/about" className="text-white hover:text-white/80 font-medium">About</Link></li>
+                <li><Link to="/contact" className="text-white hover:text-white/80 font-medium">Contact us</Link></li>
+                <li><Link to="/careers" className="text-white hover:text-white/80 font-medium">Careers</Link></li>
+                <li><Link to="/investors" className="text-white hover:text-white/80 font-medium">Investors</Link></li>
+                <li><Link to="/support" className="text-white hover:text-white/80 font-medium">Support</Link></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h4 className="text-white/70 text-sm font-medium mb-4">Legal</h4>
+              <ul className="space-y-3">
+                <li><Link to="/guidelines" className="text-white hover:text-white/80 font-medium">Guidelines</Link></li>
+                <li><Link to="/privacy" className="text-white hover:text-white/80 font-medium">Privacy policy</Link></li>
+                <li><Link to="/terms" className="text-white hover:text-white/80 font-medium">Terms and conditions</Link></li>
+                <li><Link to="/cookies" className="text-white hover:text-white/80 font-medium">Manage cookies</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex justify-center gap-6 pt-8 border-t border-white/20">
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+            </a>
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+            </a>
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="#" className="text-white hover:text-white/80 transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
