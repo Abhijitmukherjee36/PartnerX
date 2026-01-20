@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 
 export default function Landing() {
   return (
@@ -269,74 +273,268 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== SECTION 2: Mission ==================== */}
-      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-b from-black via-gray-950 to-black">
-        {/* Background glow */}
+      {/* ==================== SECTION 2: Premium Community Showcase ==================== */}
+      <section className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 md:px-8 lg:px-12 bg-black overflow-hidden">
+        {/* Background glows - responsive sizes */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2"></div>
+          <div className="absolute top-0 left-1/4 w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-primary/8 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-[250px] sm:w-[350px] md:w-[450px] lg:w-[500px] h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] bg-primary/8 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Custom Swiper Styles */}
+        <style>{`
+          .community-swiper {
+            padding: 20px 0 40px;
+          }
+          @media (min-width: 640px) {
+            .community-swiper {
+              padding: 30px 0 50px;
+            }
+          }
+          @media (min-width: 1024px) {
+            .community-swiper {
+              padding: 40px 0 60px;
+            }
+          }
+          .community-swiper .swiper-slide {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.35;
+          }
+          .community-swiper .swiper-slide-active {
+            opacity: 1;
+          }
+          .community-swiper .swiper-slide-active .testimonial-card {
+            box-shadow: 0 0 40px rgba(227, 11, 92, 0.5), 0 0 70px rgba(227, 11, 92, 0.3);
+          }
+          @media (min-width: 768px) {
+            .community-swiper .swiper-slide-active .testimonial-card {
+              box-shadow: 0 0 50px rgba(227, 11, 92, 0.6), 0 0 90px rgba(227, 11, 92, 0.4);
+            }
+          }
+          .testimonial-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 50px rgba(227, 11, 92, 0.6), 0 0 80px rgba(227, 11, 92, 0.4) !important;
+          }
+          @media (min-width: 768px) {
+            .testimonial-card:hover {
+              transform: translateY(-12px) scale(1.03);
+              box-shadow: 0 0 60px rgba(227, 11, 92, 0.7), 0 0 100px rgba(227, 11, 92, 0.5) !important;
+            }
+          }
+        `}</style>
+
+        <div className="w-full max-w-7xl mx-auto text-center relative z-10">
           
-          {/* Left Side - Text Content */}
-          <div className="order-2 lg:order-1">
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              We exist to bring
-              <br />
-              people closer to
-              <br />
-              <span className="gradient-text">experiences.</span>
-            </h2>
+          {/* Heading - Responsive Typography */}
+          <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-3 sm:mb-4 px-2">
+            Join a Thriving Community
+            <br className="hidden xs:block" />
+            <span className="xs:hidden"> </span>of Explorers. <span className="gradient-text">Trust PartnerX.</span>
+          </h2>
 
-            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-8 max-w-lg">
-              We want our members to find meaningful and authentic connections that ignite confidence and joy in every journey.
-            </p>
+          {/* Subtext - Responsive */}
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto px-2">
+            Connect with verified partners for travel, events, co-living, adventures, and more. No more solo suffering.
+          </p>
 
-            <Link
-              to="/discover"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
+          {/* Testimonial Cards Swiper */}
+          <div className="community-swiper relative -mx-4 sm:mx-0">
+            <Swiper
+              modules={[Autoplay, EffectCoverflow]}
+              effect="coverflow"
+              grabCursor={true}
+              slidesPerView={1.8}
+              spaceBetween={12}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+              }}
+              coverflowEffect={{
+                rotate: 8,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              breakpoints={{
+                400: { 
+                  slidesPerView: 2.2, 
+                  spaceBetween: 16,
+                  coverflowEffect: { rotate: 10, depth: 120, modifier: 1.1 }
+                },
+                480: { 
+                  slidesPerView: 2.4, 
+                  spaceBetween: 20,
+                  coverflowEffect: { rotate: 12, depth: 140, modifier: 1.2 }
+                },
+                640: { 
+                  slidesPerView: 2.6, 
+                  spaceBetween: 24,
+                  coverflowEffect: { rotate: 14, depth: 160, modifier: 1.3 }
+                },
+                768: { 
+                  slidesPerView: 2.8, 
+                  spaceBetween: 28,
+                  coverflowEffect: { rotate: 15, depth: 180, modifier: 1.4 }
+                },
+                1024: { 
+                  slidesPerView: 3.2, 
+                  spaceBetween: 32,
+                  coverflowEffect: { rotate: 15, depth: 200, modifier: 1.5 }
+                },
+                1280: { 
+                  slidesPerView: 3.6, 
+                  spaceBetween: 36,
+                  coverflowEffect: { rotate: 15, depth: 220, modifier: 1.6 }
+                },
+              }}
+              className="!overflow-visible"
             >
-              Discover Partners
-            </Link>
+              {/* Card 1 - Samika */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/travel-adventure.png" alt="Samika" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "As someone introverted, walking into groups and parties was daunting. PartnerX helped me find adventure buddies who respect my pace."
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Samika</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 2 - Sameen */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/event-concert.png" alt="Sameen" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "There was this three-day music festival and I desperately wanted to go. Through PartnerX, I met Sarah and we had the time of our lives!"
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Sameen</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 3 - Simon */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/friends-cafe.png" alt="Simon" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "New city, no connections. PartnerX helped me find incredible people to explore with. Every experience has been memorable and safe."
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Simon</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 4 - Alex */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/travel-adventure.png" alt="Alex" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "Solo travel was getting lonely. PartnerX introduced me to verified companions who share my passion for adventure."
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Alex</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 5 - Maya */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/event-concert.png" alt="Maya" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "From spontaneous concerts to planned road trips, the connections here are real and lasting. Best community platform!"
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Maya</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 6 - Jordan */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/friends-cafe.png" alt="Jordan" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "Found hiking partners who became lifelong friends. We've conquered 10 trails together and counting!"
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Jordan</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 7 - Chris */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/travel-adventure.png" alt="Chris" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "Never imagined festival season could be this amazing. PartnerX connected me with my music tribe!"
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Chris</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              {/* Card 8 - Taylor */}
+              <SwiperSlide>
+                <div className="testimonial-card rounded-xl sm:rounded-2xl p-[2px] sm:p-[3px] bg-gradient-to-br from-primary via-primary/60 to-primary/30 shadow-[0_0_20px_rgba(227,11,92,0.25)] sm:shadow-[0_0_30px_rgba(227,11,92,0.3)] mx-auto w-[140px] xs:w-[160px] sm:w-[190px] md:w-[210px]">
+                  <div className="bg-black rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 aspect-[3/4] flex flex-col items-center text-center">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-primary/50 mb-2 sm:mb-3 flex-shrink-0">
+                      <img src="/images/event-concert.png" alt="Taylor" className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-gray-300 text-[10px] xs:text-xs sm:text-xs leading-relaxed mb-2 sm:mb-3 flex-grow line-clamp-5">
+                      "Co-living through PartnerX has been transformative. It's like finding your tribe in a new city within weeks!"
+                    </p>
+                    <p className="text-primary font-semibold text-xs sm:text-sm flex-shrink-0">Taylor</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
           </div>
 
-          {/* Right Side - Photos with Tags */}
-          <div className="relative order-1 lg:order-2 h-[350px] sm:h-[400px] lg:h-[450px]">
-            {/* Main Photo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] lg:w-[260px] rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 border border-primary/20">
-              <img src="/images/travel-adventure.png" alt="Travel Partner" className="w-full aspect-[3/4] object-cover" />
-              <div className="absolute top-4 -right-4 sm:-right-6">
-                <span className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-full shadow-lg tag-rotate-2 inline-block">
-                  Outdoors
-                </span>
-              </div>
-            </div>
-
-            {/* Second Photo - Top Right */}
-            <div className="absolute top-4 sm:top-6 right-0 sm:right-4 w-[110px] sm:w-[140px] lg:w-[160px] rounded-xl overflow-hidden shadow-xl border border-gray-700">
-              <img src="/images/event-concert.png" alt="Event Partner" className="w-full aspect-[3/4] object-cover" />
-              <div className="absolute top-2 -left-2 sm:-left-4">
-                <span className="px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-full shadow-lg tag-rotate-3 inline-block">
-                  Concerts
-                </span>
-              </div>
-            </div>
-
-            {/* Third Photo - Bottom Right */}
-            <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-8 w-[90px] sm:w-[120px] lg:w-[140px] rounded-xl overflow-hidden shadow-xl border border-gray-700">
-              <img src="/images/friends-cafe.png" alt="Cafe Partner" className="w-full aspect-[3/4] object-cover" />
-              <div className="absolute -top-2 right-2">
-                <span className="px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-full shadow-lg tag-rotate-1 inline-block">
-                  Coffee
-                </span>
-              </div>
-            </div>
+          {/* Stats/Metric - Responsive */}
+          <div className="mb-6 sm:mb-8 mt-6 sm:mt-8">
+            <p className="font-display text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold gradient-text mb-1 sm:mb-2">1k+</p>
+            <p className="text-white text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold">Verified Partners Ready</p>
           </div>
+
+          {/* CTA Button - Responsive */}
+          <Link
+            to="/signup"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.4)] sm:shadow-[0_0_25px_rgba(227,11,92,0.5)] hover:shadow-[0_0_35px_rgba(227,11,92,0.6)] sm:hover:shadow-[0_0_40px_rgba(227,11,92,0.7)] hover:scale-105"
+          >
+            Join the Community
+          </Link>
         </div>
       </section>
 
       {/* ==================== SECTION 3: Community ==================== */}
-      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-b from-black to-gray-950">
+      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black">
         {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl"></div>
