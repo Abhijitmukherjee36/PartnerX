@@ -1,10 +1,57 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
 export default function Landing() {
+  // Animated counter state
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const counterRef = useRef(null);
+
+  // Counter animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            // Animate from 0 to 1000
+            let start = 0;
+            const end = 1000;
+            const duration = 1500; // 1.5 seconds
+            const increment = end / (duration / 16); // ~60fps
+            
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= end) {
+                setCount(end);
+                clearInterval(timer);
+              } else {
+                setCount(Math.floor(start));
+              }
+            }, 16);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  // Format count to display as "1k+"
+  const formatCount = (num) => {
+    if (num >= 1000) return '1k+';
+    return num.toString();
+  };
+
   return (
     <div className="min-h-screen bg-black font-body text-white relative overflow-x-hidden">
       {/* Custom styles */}
@@ -517,9 +564,11 @@ export default function Landing() {
             </Swiper>
           </div>
 
-          {/* Stats/Metric - Responsive */}
-          <div className="mb-6 sm:mb-8 mt-6 sm:mt-8">
-            <p className="font-display text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold gradient-text mb-1 sm:mb-2">1k+</p>
+          {/* Stats/Metric - Animated Counter */}
+          <div ref={counterRef} className="mb-6 sm:mb-8 mt-6 sm:mt-8">
+            <p className="font-display text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold gradient-text mb-1 sm:mb-2">
+              {formatCount(count)}
+            </p>
             <p className="text-white text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold">Verified Partners Ready</p>
           </div>
 
@@ -534,54 +583,57 @@ export default function Landing() {
       </section>
 
       {/* ==================== SECTION 3: Community ==================== */}
-      <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black">
+      <section className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-black overflow-hidden">
         {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-primary/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center relative z-10">
           
-          {/* Left Side - Photo with Badge */}
-          <div className="relative h-[350px] sm:h-[400px] lg:h-[450px]">
-            {/* Main Photo */}
-            <div className="relative w-full max-w-md mx-auto h-full rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-              <img 
-                src="/images/friends-cafe.png" 
-                alt="Community Members" 
+          {/* Left Side - Video */}
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+            {/* Video Container */}
+            <div className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] max-w-[500px] lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-primary/20">
+              <video 
+                src="/share-idea-landing.mp4" 
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover"
               />
               
               {/* Member Circle Badge */}
-              <div className="absolute bottom-6 left-6">
-                <div className="member-badge w-24 h-24 sm:w-28 sm:h-28 rounded-full flex flex-col items-center justify-center text-white">
-                  <svg className="w-8 h-8 mb-1" fill="currentColor" viewBox="0 0 24 24">
+              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6">
+                <div className="member-badge w-20 h-20 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center text-white bg-gradient-to-br from-primary to-primary-dark shadow-lg shadow-primary/40">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8 mb-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
-                  <span className="text-xs font-bold uppercase tracking-wider">Member</span>
-                  <span className="text-xs font-bold uppercase tracking-wider">Circle</span>
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Member</span>
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Circle</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Side - Text Content */}
-          <div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 sm:mb-6">
               Share your <span className="gradient-text">ideas</span>
             </h2>
 
-            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-4">
+            <p className="text-gray-400 text-sm sm:text-base lg:text-lg mb-4">
               Help shape the future of PartnerX by joining our Member Circle. This select community of Members shares ideas directly with our team through chats, discussions, and product tests.
             </p>
 
-            <p className="text-gray-400 text-base sm:text-lg lg:text-xl mb-8">
+            <p className="text-gray-400 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8">
               Participants get early access to new features, sneak peeks at upcoming campaigns, and the chance to help make PartnerX even better for everyone.
             </p>
 
             <Link
               to="/signup"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.6)] hover:scale-105"
             >
               Sign up
             </Link>
