@@ -10,6 +10,7 @@ import Events from "../pages/Events";
 import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Onboarding from "../pages/Onboarding";
 import Discover from "../pages/Discover";
 import Profile from "../pages/Profile";
 
@@ -24,6 +25,7 @@ export default function AppRoutes() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/onboarding" element={<Onboarding />} />
 
       {/* Protected */}
       <Route

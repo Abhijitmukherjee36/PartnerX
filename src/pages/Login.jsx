@@ -23,7 +23,7 @@ export default function Login() {
     setIsLoading(true);
     try {
       await login(email, password);
-      navigate("/discover");
+      navigate("/home");
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
@@ -49,7 +49,7 @@ export default function Login() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
       await login(mobileNumber, "otp-verified");
-      navigate("/discover");
+      navigate("/home");
     } catch (error) {
       console.error("OTP verification failed:", error);
     } finally {

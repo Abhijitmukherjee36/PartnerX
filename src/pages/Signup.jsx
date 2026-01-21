@@ -34,7 +34,7 @@ export default function Signup() {
     setIsLoading(true);
     try {
       await signup(name, email, password);
-      navigate("/discover");
+      navigate("/onboarding");
     } catch (error) {
       console.error("Signup failed:", error);
       setError("Signup failed. Please try again.");
@@ -61,7 +61,7 @@ export default function Signup() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
       await signup("Mobile User", mobileNumber, "otp-verified");
-      navigate("/discover");
+      navigate("/onboarding");
     } catch (error) {
       console.error("OTP verification failed:", error);
     } finally {
