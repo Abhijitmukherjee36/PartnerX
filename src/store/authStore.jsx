@@ -4,10 +4,16 @@ export const useAuthStore = create((set) => ({
   isAuthenticated: false,
   user: null,
 
-  login: (userData) =>
+  login: (email, password) =>
     set({
       isAuthenticated: true,
-      user: userData,
+      user: { email },
+    }),
+
+  signup: (name, email, password) =>
+    set({
+      isAuthenticated: true,
+      user: { name, email },
     }),
 
   logout: () =>
@@ -16,3 +22,5 @@ export const useAuthStore = create((set) => ({
       user: null,
     }),
 }));
+
+export default useAuthStore;
