@@ -163,7 +163,7 @@ export default function Landing() {
 
             {/* CTA Button */}
             <Link
-              to="/discover"
+              to="/login"
               className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 group text-sm sm:text-base shadow-[0_0_20px_rgba(255,20,147,0.5)] hover:shadow-[0_0_30px_rgba(255,20,147,0.7)]"
             >
               Get Started
@@ -574,7 +574,7 @@ export default function Landing() {
 
           {/* CTA Button - Responsive */}
           <Link
-            to="/signup"
+            to="/login"
             className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.4)] sm:shadow-[0_0_25px_rgba(227,11,92,0.5)] hover:shadow-[0_0_35px_rgba(227,11,92,0.6)] sm:hover:shadow-[0_0_40px_rgba(227,11,92,0.7)] hover:scale-105"
           >
             Join the Community
@@ -632,7 +632,7 @@ export default function Landing() {
             </p>
 
             <Link
-              to="/signup"
+              to="/login"
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.6)] hover:scale-105"
             >
               Sign up
@@ -665,7 +665,7 @@ export default function Landing() {
               <p className="text-white/80 mb-4">
                 Whether you're new to a city or looking for adventure buddies, PartnerX helps you find verified partners for travel, events, and everyday moments.
               </p>
-              <Link to="/discover" className="inline-flex items-center text-white font-medium hover:underline group/link">
+              <Link to="/login" className="inline-flex items-center text-white font-medium hover:underline group/link">
                 Find your partner
                 <svg className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -691,7 +691,7 @@ export default function Landing() {
               <p className="text-white/80 mb-4">
                 Whether you've moved to a new city or just want to expand your circle, discover local events and find like-minded people who match your vibe.
               </p>
-              <Link to="/events" className="inline-flex items-center text-white font-medium hover:underline group/link">
+              <Link to="/login" className="inline-flex items-center text-white font-medium hover:underline group/link">
                 Find your events
                 <svg className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -724,7 +724,7 @@ export default function Landing() {
               
               {/* CTA Button */}
               <Link
-                to="/stories"
+                to="/login"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.7)]"
               >
                 Read more stories
@@ -785,7 +785,7 @@ export default function Landing() {
               
               {/* CTA Button */}
               <Link
-                to="/events"
+                to="/login"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(227,11,92,0.5)] hover:shadow-[0_0_30px_rgba(227,11,92,0.7)]"
               >
                 Meet in person
